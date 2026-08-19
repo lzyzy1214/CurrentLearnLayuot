@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+        Base application theme.
+        兼容性说明：
+        - statusBarColor / navigationBarColor：API 21+ 有效，低版本安全忽略
+        - windowLightStatusBar：API 23+ 有效，minSdk 24 所以可直接使用
+        - windowLightNavigationBar：API 27+ 有效，用 tools:targetApi 标注
+        - windowOptOutEdgeToEdgeEnforcement：API 35+ 有效，用 tools:targetApi 标注
+    -->
+    <style name="Base.Theme.CurrentLearnLayuot" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:navigationBarColor">@color/nav_bar</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+
+        <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:targetApi="35">true</item>
+    </style>
+
+    <style name="Theme.CurrentLearnLayuot" parent="Base.Theme.CurrentLearnLayuot" />
+
+    <style name="Theme.CurrentLearnLayuot.SystemBarDemo" parent="Base.Theme.CurrentLearnLayuot">
+        <item name="android:statusBarColor">@color/demo_status_bar</item>
+        <item name="android:navigationBarColor">@color/demo_nav_bar</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+    </style>
+</resources>

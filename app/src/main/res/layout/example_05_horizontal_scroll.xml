@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0F7FA"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="#00BCD4" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:background="#26C6DA" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:background="#4DD0E1" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:background="#80DEEA" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:background="#B2EBF2" />
+
+    </LinearLayout>
+
+</HorizontalScrollView>

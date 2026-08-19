@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="16dp"
+    android:background="@color/example_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="代码验证挂载位置"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Activity Proof -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. 验证 Activity.setContentView 挂到 content"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#263238"
+            android:padding="12dp"
+            android:text="// 在 Activity.onCreate 中
+View decorView = getWindow().getDecorView();
+ViewGroup content = decorView.findViewById(android.R.id.content);
+Log.d(&quot;Proof&quot;, &quot;content 类型: &quot; + content.getClass().getName());
+for (int i = 0; i &lt; content.getChildCount(); i++) {
+    Log.d(&quot;Proof&quot;, &quot;子 View: &quot; + content.getChildAt(i).getClass().getName());
+}"
+            android:textSize="12sp"
+            android:textColor="#A5D6A7"
+            android:fontFamily="monospace"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Fragment Proof -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. 验证 Fragment 最终挂到 Activity content"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#263238"
+            android:padding="12dp"
+            android:text="// 在 Fragment.onCreateView 中
+View view = inflater.inflate(R.layout.fragment_demo, container, false);
+view.post(() -&gt; {
+    View current = view;
+    StringBuilder sb = new StringBuilder();
+    while (current != null) {
+        sb.append(current.getClass().getSimpleName());
+        ViewParent parent = current.getParent();
+        if (parent instanceof View) {
+            sb.append(&quot; -&gt; &quot;);
+            current = (View) parent;
+        } else {
+            break;
+        }
+    }
+    Log.d(&quot;Proof&quot;, &quot;父链: &quot; + sb);
+});"
+            android:textSize="12sp"
+            android:textColor="#A5D6A7"
+            android:fontFamily="monospace"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Adapter Proof -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. 验证 Adapter item 挂到 RecyclerView"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#263238"
+            android:padding="12dp"
+            android:text="@Override
+public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    Log.d(&quot;Proof&quot;, &quot;parent: &quot; + parent.getClass().getName());
+    View view = LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.item_demo, parent, false);
+    return new ViewHolder(view);
+}"
+            android:textSize="12sp"
+            android:textColor="#A5D6A7"
+            android:fontFamily="monospace"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Factory2 Proof -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. 全局监听 LayoutInflater 被谁调用"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#263238"
+            android:padding="12dp"
+            android:text="LayoutInflaterCompat.setFactory2(
+    LayoutInflater.from(this),
+    new LayoutInflater.Factory2() {
+        @Override
+        public View onCreateView(View parent, String name,
+                                 Context context, AttributeSet attrs) {
+            Log.d(&quot;Proof&quot;, &quot;inflate: &quot; + name
+                + &quot;, parent=&quot; + (parent != null ? parent.getClass().getSimpleName() : &quot;null&quot;));
+            return null;
+        }
+        @Override
+        public View onCreateView(String name, Context context, AttributeSet attrs) {
+            return null;
+        }
+    });"
+            android:textSize="12sp"
+            android:textColor="#A5D6A7"
+            android:fontFamily="monospace"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Summary -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_flow_card"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="验证结论"
+                android:textSize="16sp"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Activity：setContentView 的 View 挂在 android.R.id.content 下\n• Fragment：最终父链会经过 ContentFrameLayout（Activity content）\n• Adapter：onCreateViewHolder 的 parent 就是 RecyclerView\n• Factory2：可以全局监听所有 inflate 调用和调用方"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="4dp"
+                android:lineSpacingMultiplier="1.2" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

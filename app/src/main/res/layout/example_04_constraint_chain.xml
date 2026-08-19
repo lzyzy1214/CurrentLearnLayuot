@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3E5F5"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvSpread"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="#9C27B0"
+        android:gravity="center"
+        android:text="spread"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/tvSpread2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSpread2"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="#AB47BC"
+        android:gravity="center"
+        android:text="spread"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/tvSpread3"
+        app:layout_constraintStart_toEndOf="@id/tvSpread"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSpread3"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="#BA68C8"
+        android:gravity="center"
+        android:text="spread"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvSpread2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPacked"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="#7B1FA2"
+        android:gravity="center"
+        android:text="packed"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/tvPacked2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSpread" />
+
+    <TextView
+        android:id="@+id/tvPacked2"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="#6A1B9A"
+        android:gravity="center"
+        android:text="packed"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvPacked"
+        app:layout_constraintTop_toBottomOf="@id/tvSpread" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

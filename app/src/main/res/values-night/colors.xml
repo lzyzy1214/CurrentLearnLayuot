@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="status_bar">#0D47A1</color>
+    <color name="nav_bar">#0A2C5E</color>
+    <color name="surface">#121212</color>
+    <color name="text_primary">#E0E0E0</color>
+    <color name="text_secondary">#9E9E9E</color>
+    <color name="divider">#424242</color>
+    <color name="chip_background">#1E3A5F</color>
+    <color name="example_bg">#1E1E1E</color>
+</resources>

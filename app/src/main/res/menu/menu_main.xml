@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="搜索"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom" />
+
+    <item
+        android:id="@+id/action_system_bar_demo"
+        android:title="System Bar 演示"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_view_tree_info"
+        android:title="View Tree 说明"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_xml_inflation"
+        android:title="XML 加载流程"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_xml_inflation_demo"
+        android:title="XML 加载实时验证"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_view_load_flow"
+        android:title="视图加载流程演示"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_xml_loading_flow_docs"
+        android:title="XML 加载流程文档演示（新）"
+        app:showAsAction="never" />
+
+</menu>

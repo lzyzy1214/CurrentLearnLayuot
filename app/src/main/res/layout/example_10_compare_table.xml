@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3E5F5"
+    android:padding="8dp">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:stretchColumns="1,2,3,4,5,6">
+
+        <TableRow android:background="#E1BEE7">
+            <TextView
+                android:padding="8dp"
+                android:text="特性"
+                android:textStyle="bold" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Linear"
+                android:textStyle="bold" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Relative"
+                android:textStyle="bold" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Frame"
+                android:textStyle="bold" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Constraint"
+                android:textStyle="bold" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Compose"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:padding="8dp"
+                android:text="嵌套性能" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="❌" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⚠️" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="✅" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="✅✅" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="✅✅" />
+        </TableRow>
+
+        <TableRow android:background="#F3E5F5">
+            <TextView
+                android:padding="8dp"
+                android:text="学习难度" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐⭐" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐⭐⭐" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐⭐" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:padding="8dp"
+                android:text="灵活度" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐⭐" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐⭐" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐⭐⭐" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⭐⭐⭐" />
+        </TableRow>
+
+        <TableRow android:background="#F3E5F5">
+            <TextView
+                android:padding="8dp"
+                android:text="扁平化" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="❌" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="⚠️" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="❌" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="✅✅" />
+            <TextView
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="✅✅" />
+        </TableRow>
+
+    </TableLayout>
+
+</ScrollView>

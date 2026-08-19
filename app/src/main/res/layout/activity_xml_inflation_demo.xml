@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/example_bg">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Activity 入口 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. Activity.setContentView"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/tvActivityLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1B1B1B"
+                android:padding="12dp"
+                android:textColor="#A5D6A7"
+                android:textSize="12sp"
+                android:fontFamily="monospace"
+                android:lineSpacingMultiplier="1.2"
+                android:minHeight="80dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Fragment 入口 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. Fragment.onCreateView"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/tvFragmentLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1B1B1B"
+                android:padding="12dp"
+                android:textColor="#90CAF9"
+                android:textSize="12sp"
+                android:fontFamily="monospace"
+                android:lineSpacingMultiplier="1.2"
+                android:minHeight="80dp"
+                android:layout_marginBottom="12dp" />
+
+            <FrameLayout
+                android:id="@+id/fragmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Adapter 入口 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. Adapter.onCreateViewHolder"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/tvAdapterLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1B1B1B"
+                android:padding="12dp"
+                android:textColor="#FFCC80"
+                android:textSize="12sp"
+                android:fontFamily="monospace"
+                android:lineSpacingMultiplier="1.2"
+                android:minHeight="80dp"
+                android:layout_marginBottom="12dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="80dp"
+                android:background="@drawable/bg_flow_card"
+                android:padding="8dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

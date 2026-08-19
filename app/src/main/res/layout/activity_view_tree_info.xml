@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android View Tree 层级图"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Activity → Window → PhoneWindow → DecorView → 系统 UI / 内容"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary" />
+
+        <!-- 非 View 层 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="非 View 层（代码层，Layout Inspector 看不到）"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFCDD2"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Activity"
+                android:textColor="#000000" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="16dp"
+                android:background="#757575" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFE0B2"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Window（抽象类）"
+                android:textColor="#000000" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="16dp"
+                android:background="#757575" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFF9C4"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="PhoneWindow（具体实现）"
+                android:textColor="#000000" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="16dp"
+                android:background="#757575" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#E1BEE7"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="DecorView（FrameLayout 子类）"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- View 树 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="View 树（Layout Inspector 可见）"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#E1BEE7"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="DecorView"
+                android:textColor="#000000" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:background="#757575" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="2dp"
+                android:background="#757575" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="16dp"
+                        android:background="#757575" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFCDD2"
+                        android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                        android:text="statusBarBackground"
+                        android:textSize="11sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="16dp"
+                        android:background="#757575" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#C8E6C9"
+                        android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                        android:text="navigationBarBackground"
+                        android:textSize="11sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="16dp"
+                        android:background="#757575" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#DCEDC8"
+                        android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                        android:text="content\n(R.id.content)"
+                        android:textSize="11sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="View vs ViewGroup"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:stretchColumns="1">
+
+            <TableRow android:background="#F5F5F5">
+                <TextView
+                    android:padding="8dp"
+                    android:text="类型"
+                    android:textStyle="bold" />
+                <TextView
+                    android:padding="8dp"
+                    android:text="作用"
+                    android:textStyle="bold" />
+                <TextView
+                    android:padding="8dp"
+                    android:text="例子"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:padding="8dp"
+                    android:text="View" />
+                <TextView
+                    android:padding="8dp"
+                    android:text="屏幕上绘制可见内容并处理交互" />
+                <TextView
+                    android:padding="8dp"
+                    android:text="TextView\nButton\nImageView" />
+            </TableRow>
+
+            <TableRow android:background="#F5F5F5">
+                <TextView
+                    android:padding="8dp"
+                    android:text="ViewGroup" />
+                <TextView
+                    android:padding="8dp"
+                    android:text="容纳其他 View，定义子视图布局" />
+                <TextView
+                    android:padding="8dp"
+                    android:text="LinearLayout\nFrameLayout\nConstraintLayout" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="SDK 对 statusBarBackground / navigationBarBackground 的影响"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <TableLayout
+            android:id="@+id/tableSdk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:stretchColumns="*">
+
+            <TableRow android:background="#E3F2FD">
+                <TextView
+                    android:padding="6dp"
+                    android:text="targetSdk"
+                    android:textStyle="bold" />
+                <TextView
+                    android:padding="6dp"
+                    android:text="设备系统"
+                    android:textStyle="bold" />
+                <TextView
+                    android:padding="6dp"
+                    android:text="强制 Edge-to-Edge？"
+                    android:textStyle="bold" />
+                <TextView
+                    android:padding="6dp"
+                    android:text="是否显示"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+                <TextView android:padding="6dp" android:text="≤ 34" />
+                <TextView android:padding="6dp" android:text="14/15/16" />
+                <TextView android:padding="6dp" android:text="否" />
+                <TextView android:padding="6dp" android:text="✅ 显示" />
+            </TableRow>
+
+            <TableRow android:background="#F5F5F5">
+                <TextView android:padding="6dp" android:text="35" />
+                <TextView android:padding="6dp" android:text="Android 15" />
+                <TextView android:padding="6dp" android:text="默认强制，可退出" />
+                <TextView android:padding="6dp" android:text="✅ 退出后显示" />
+            </TableRow>
+
+            <TableRow>
+                <TextView android:padding="6dp" android:text="35" />
+                <TextView android:padding="6dp" android:text="Android 16" />
+                <TextView android:padding="6dp" android:text="实际强制" />
+                <TextView android:padding="6dp" android:text="❌ 不显示" />
+            </TableRow>
+
+            <TableRow android:background="#F5F5F5">
+                <TextView android:padding="6dp" android:text="36" />
+                <TextView android:padding="6dp" android:text="Android 15" />
+                <TextView android:padding="6dp" android:text="默认强制，可退出" />
+                <TextView android:padding="6dp" android:text="✅ 退出后显示" />
+            </TableRow>
+
+            <TableRow>
+                <TextView android:padding="6dp" android:text="36" />
+                <TextView android:padding="6dp" android:text="Android 16" />
+                <TextView android:padding="6dp" android:text="强制，opt-out 停用" />
+                <TextView android:padding="6dp" android:text="❌ 不显示" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="说明：这两个节点只在非 Edge-to-Edge 模式下才会被创建。当前 App targetSdk=35，在 Android 15 上通过 windowOptOutEdgeToEdgeEnforcement=true 可正常显示；在 Android 16 上 targetSdk 35 同样会被强制 Edge-to-Edge，节点不显示。"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary"
+            android:lineSpacingMultiplier="1.2" />
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>

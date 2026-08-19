@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一台电脑双 Git 账户配置指南</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+            --accent: #58a6ff;
+            --green: #3fb950;
+            --yellow: #d29922;
+            --red: #f85149;
+            --code-bg: #1c2128;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 0;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2em;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1em;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .step-num {
+            background: var(--accent);
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+        .step-title {
+            font-size: 1.25em;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .step-body {
+            color: var(--text);
+            font-size: 0.95em;
+        }
+        .step-body p {
+            margin-bottom: 12px;
+        }
+        .step-body ul, .step-body ol {
+            margin: 8px 0 12px 24px;
+        }
+        .step-body li {
+            margin-bottom: 6px;
+        }
+        code {
+            background: var(--code-bg);
+            color: var(--accent);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.88em;
+        }
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        pre code {
+            background: none;
+            color: var(--text);
+            padding: 0;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        .comment { color: #6a9955; }
+        .keyword { color: #ff7b72; }
+        .string { color: #a5d6ff; }
+        .path { color: #d2a8ff; }
+        .done {
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin: 12px 0;
+            color: var(--green);
+            font-size: 0.9em;
+        }
+        .todo {
+            background: rgba(210, 153, 34, 0.1);
+            border: 1px solid rgba(210, 153, 34, 0.3);
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin: 12px 0;
+            color: var(--yellow);
+            font-size: 0.9em;
+        }
+        .tip {
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 6px;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 0.9em;
+        }
+        .tip-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.9em;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background: var(--code-bg);
+            color: var(--accent);
+            font-weight: 600;
+        }
+        td code {
+            font-size: 0.85em;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-dim);
+            font-size: 0.85em;
+            border-top: 1px solid var(--border);
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .badge-done { background: rgba(63, 185, 80, 0.2); color: var(--green); }
+        .badge-todo { background: rgba(210, 153, 34, 0.2); color: var(--yellow); }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>一台电脑双 Git 账户配置指南</h1>
+    <p class="subtitle">主力工作账户 + 教学实战账户 · SSH 密钥隔离 · 自动身份切换</p>
+</div>
+
+<div class="container">
+
+<!-- 总览 -->
+<div class="step">
+    <div class="step-header">
+        <div class="step-num">0</div>
+        <div class="step-title">总体架构</div>
+    </div>
+    <div class="step-body">
+        <p>核心原理：为每个账户生成独立的 SSH 密钥对，通过 SSH config 的 Host 别名区分，Git clone 时用不同地址自动选择密钥。</p>
+        <table>
+            <tr><th>账户</th><th>用途</th><th>SSH Host 别名</th><th>密钥文件</th><th>状态</th></tr>
+            <tr>
+                <td>账户 A（主力）</td>
+                <td>日常工作提交</td>
+                <td><code>github.com</code></td>
+                <td><code>~/.ssh/id_rsa</code></td>
+                <td><span class="badge badge-done">已配置</span></td>
+            </tr>
+            <tr>
+                <td>账户 B（教学）</td>
+                <td>实例教学实战</td>
+                <td><code>github-teach</code></td>
+                <td><code>~/.ssh/id_ed25519_teach</code></td>
+                <td><span class="badge badge-done">已配置</span></td>
+            </tr>
+        </table>
+        <p>使用时的区别：</p>
+        <table>
+            <tr><th>操作</th><th>主力账户</th><th>教学账户</th></tr>
+            <tr>
+                <td>克隆仓库</td>
+                <td><code>git clone git@github.com:userA/repo.git</code></td>
+                <td><code>git clone git@github-teach:userB/repo.git</code></td>
+            </tr>
+            <tr>
+                <td>提交身份</td>
+                <td>全局配置自动生效</td>
+                <td>仓库内单独配置</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Step 1 -->
+<div class="step">
+    <div class="step-header">
+        <div class="step-num">1</div>
+        <div class="step-title">生成两套 SSH 密钥</div>
+    </div>
+    <div class="step-body">
+        <div class="done">✅ 已完成 — 两套密钥已生成在 <code>~/.ssh/</code> 目录</div>
+
+        <p><strong>主力账户密钥</strong>（已存在）：</p>
+<pre><code><span class="comment"># 已有的 RSA 密钥（主力工作账户）</span>
+~/.ssh/id_rsa        <span class="comment"># 私钥</span>
+~/.ssh/id_rsa.pub     <span class="comment"># 公钥 — 关联邮箱 3217212869@qq.com</span></code></pre>
+
+        <p><strong>教学账户密钥</strong>（刚生成）：</p>
+<pre><code><span class="comment"># 新生成的 ED25519 密钥（教学实战账户）</span>
+~/.ssh/id_ed25519_teach        <span class="comment"># 私钥</span>
+~/.ssh/id_ed25519_teach.pub   <span class="comment"># 公钥</span></code></pre>
+
+        <p>教学账户的公钥内容（下一步需要添加到 GitHub）：</p>
+<pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFr+rh3ezWJmmT3+8FiFZ4eXTWFrd8PhzdX79kpyUN8H teach-demo-account</code></pre>
+    </div>
+</div>
+
+<!-- Step 2 -->
+<div class="step">
+    <div class="step-header">
+        <div class="step-num">2</div>
+        <div class="step-title">配置 SSH config（区分两把密钥）</div>
+    </div>
+    <div class="step-body">
+        <div class="done">✅ 已完成 — <code>~/.ssh/config</code> 文件已创建</div>
+
+        <p>文件内容（<code>C:\Users\你的用户名\.ssh\config</code>）：</p>
+<pre><code><span class="comment"># ===== SSH 多账户配置 =====</span>
+
+<span class="comment"># 主力工作账户（默认，走 github.com 时自动使用）</span>
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa
+
+<span class="comment"># 教学实战账户（用 github-teach 别名触发）</span>
+Host github-teach
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_teach</code></pre>
+
+        <div class="tip">
+            <div class="tip-title">原理说明</div>
+            <p>SSH config 的 Host 是一个"别名"。当你用 <code>git@github.com:...</code> 时，匹配第一个 Host <code>github.com</code>，使用 <code>id_rsa</code>。当你用 <code>git@github-teach:...</code> 时，匹配第二个 Host <code>github-teach</code>，使用 <code>id_ed25519_teach</code>。两个请求都连到同一个 <code>github.com</code>，但携带不同的 SSH 密钥。</p>
+        </div>
+    </div>
+</div>
+
+<!-- Step 3 -->
+<div class="step">
+    <div class="step-header">
+        <div class="step-num">3</div>
+        <div class="step-title">将两个公钥添加到对应的 GitHub 账户</div>
+    </div>
+    <div class="step-body">
+        <div class="todo">⚠️ 需要你手动操作 — 在浏览器中完成</div>
+
+        <p><strong>主力账户</strong>（如果尚未添加）：</p>
+        <ol>
+            <li>登录主力 GitHub 账户</li>
+            <li>进入 <code>Settings → SSH and GPG keys → New SSH key</code></li>
+            <li>Title 填 <code>Main PC</code></li>
+            <li>粘贴 <code>~/.ssh/id_rsa.pub</code> 的内容</li>
+            <li>点击 <code>Add SSH key</code></li>
+        </ol>
+
+        <p><strong>教学账户</strong>：</p>
+        <ol>
+            <li><strong>退出</strong>主力账户，登录教学 GitHub 账户（可用浏览器隐私模式）</li>
+            <li>进入 <code>Settings → SSH and GPG keys → New SSH key</code></li>
+            <li>Title 填 <code>Teach PC</code></li>
+            <li>粘贴以下内容：</li>
+        </ol>
+<pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFr+rh3ezWJmmT3+8FiFZ4eXTWFrd8PhzdX79kpyUN8H teach-demo-account</code></pre>
+        <p>5. 点击 <code>Add SSH key</code></p>
+    </div>
+</div>
+
+<!-- Step 4 -->
+<div class="step">
+    <div class="step-header">
+        <div class="step-num">4</div>
+        <div class="step-title">验证两个账户的 SSH 认证</div>
+    </div>
+    <div class="step-body">
+        <div class="todo">⚠️ 完成 Step 3 后在终端运行</div>
+
+        <p><strong>测试主力账户</strong>：</p>
+<pre><code>ssh -T git@github.com
+<span class="comment"># 应显示：Hi 你的主力用户名! You've successfully authenticated...</span></code></pre>
+
+        <p><strong>测试教学账户</strong>：</p>
+<pre><code>ssh -T git@github-teach
+<span class="comment"># 应显示：Hi 你的教学用户名! You've successfully authenticated...</span></code></pre>
+
+        <div class="tip">
+            <div class="tip-title">如果提示 "Are you sure you want to continue connecting?"</div>
+            <p>输入 <code>yes</code> 即可，这是首次连接 GitHub 的正常确认。</p>
+        </div>
+    </div>
+</div>
+
+<!-- Step 5 -->
+<div class="step">
+    <div class="step-header">
+        <div class="step-num">5</div>
+        <div class="step-title">配置 Git 全局 + 仓库级身份</div>
+    </div>
+    <div class="step-body">
+
+        <p><strong>全局配置</strong>（主力账户，所有仓库默认使用）：</p>
+<pre><code>git config --global user.name <span class="string">"你的主力用户名"</span>
+git config --global user.email <span class="string">"3217212869@qq.com"</span></code></pre>
+
+        <p><strong>仓库级配置</strong>（教学仓库内单独覆盖）：</p>
+<pre><code><span class="comment"># 进入教学仓库目录后执行</span>
+cd /path/to/teaching-repo
+
+git config user.name <span class="string">"你的教学用户名"</span>
+git config user.email <span class="string">"teach@example.com"</span>
+
+<span class="comment"># 注意：不要加 --global，只对当前仓库生效</span>
+<span class="comment"># 验证配置</span>
+git config user.name    <span class="comment"># 应显示教学用户名</span>
+git config user.email   <span class="comment"># 应显示教学邮箱</span></code></pre>
+
+        <div class="tip">
+            <div class="tip-title">为什么要分全局和仓库级？</div>
+            <p>Git 的配置优先级：<strong>仓库级 > 全局</strong>。主力仓库不需要额外配置（继承全局），教学仓库只需在仓库内设一次仓库级配置，互不干扰。</p>
+        </div>
+    </div>
+</div>
+
+<!-- Step 6 -->
+<div class="step">
+    <div class="step-header">
+        <div class="step-num">6</div>
+        <div class="step-title">克隆和使用仓库</div>
+    </div>
+    <div class="step-body">
+
+        <p><strong>主力仓库</strong>（正常使用，不需要任何特殊操作）：</p>
+<pre><code><span class="comment"># 直接用 github.com，自动走 id_rsa</span>
+git clone git@github.com:主力用户名/repo.git
+
+cd repo
+git config user.name    <span class="comment"># 全局配置自动生效，不需要单独设置</span>
+<span class="comment"># 正常 commit、push 即可</span></code></pre>
+
+        <p><strong>教学仓库</strong>（用 github-teach 别名）：</p>
+<pre><code><span class="comment"># 用 github-teach 替换 github.com，自动走 id_ed25519_teach</span>
+git clone git@github-teach:教学用户名/repo.git
+
+cd repo
+<span class="comment"># 设置教学仓库的提交身份（只需设一次）</span>
+git config user.name <span class="string">"你的教学用户名"</span>
+git config user.email <span class="string">"teach@example.com"</span>
+<span class="comment"># 正常 commit、push 即可</span></code></pre>
+
+        <p><strong>已有仓库切换到教学账户</strong>：</p>
+<pre><code><span class="comment"># 如果仓库之前是用 github.com 克隆的，改为 github-teach</span>
+cd /path/to/existing-repo
+git remote set-url origin git@github-teach:教学用户名/repo.git
+
+<span class="comment"># 验证</span>
+git remote -v
+<span class="comment"># 应显示：origin  git@github-teach:教学用户名/repo.git</span></code></pre>
+    </div>
+</div>
+
+<!-- 日常速查 -->
+<div class="step">
+    <div class="step-header">
+        <div class="step-num">★</div>
+        <div class="step-title">日常速查卡</div>
+    </div>
+    <div class="step-body">
+        <table>
+            <tr><th>场景</th><th>命令</th></tr>
+            <tr>
+                <td>克隆主力仓库</td>
+                <td><code>git clone git@github.com:userA/repo.git</code></td>
+            </tr>
+            <tr>
+                <td>克隆教学仓库</td>
+                <td><code>git clone git@github-teach:userB/repo.git</code></td>
+            </tr>
+            <tr>
+                <td>已有仓库切换到教学账户</td>
+                <td><code>git remote set-url origin git@github-teach:userB/repo.git</code></td>
+            </tr>
+            <tr>
+                <td>设置教学仓库提交身份</td>
+                <td><code>git config user.name "teach-name"</code><br><code>git config user.email "teach@mail.com"</code></td>
+            </tr>
+            <tr>
+                <td>验证 SSH 连接</td>
+                <td><code>ssh -T git@github.com</code> / <code>ssh -T git@github-teach</code></td>
+            </tr>
+            <tr>
+                <td>查看当前仓库的身份</td>
+                <td><code>git config user.name && git config user.email</code></td>
+            </tr>
+            <tr>
+                <td>查看当前仓库的 remote</td>
+                <td><code>git remote -v</code></td>
+            </tr>
+        </table>
+
+        <div class="tip">
+            <div class="tip-title">记忆口诀</div>
+            <p><strong>github.com = 主力</strong>（默认行为，不用改）<br>
+            <strong>github-teach = 教学</strong>（clone 和 set-url 时替换域名）<br>
+            <strong>全局 = 主力身份</strong>，<strong>仓库级 = 教学身份</strong>（不带 --global）</p>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="footer">
+    <p>SSH 密钥已生成 · config 已创建 · 接下来在 GitHub 网页添加公钥即可</p>
+</div>
+
+</body>
+</html>
